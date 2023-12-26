@@ -18,10 +18,10 @@ def main(window_size=20, k=1, desired_profit=1.01):
         )
 
         if advice['advice'] == "BUY":
-            buy(advice)
+            demo_funcs.buy(advice)
         
         elif advice['advice'] == 'SELL':
-            sell(advice, desired_profit)
+            demo_funcs.sell(advice, desired_profit)
 
         else:
             pass
