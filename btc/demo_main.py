@@ -1,7 +1,8 @@
 import demo_funcs
-import sys
+import schedule
+import time
 
-def main(window_size=20, k=1, desired_profit=1.01):
+def main(window_size=120, k=1, desired_profit=1.01):
     try:
         # Save BTC price
         demo_funcs.get_btc_price()
@@ -29,5 +30,9 @@ def main(window_size=20, k=1, desired_profit=1.01):
     except ValueError:
         pass
 
-if __name__ == '__main__':
-    main()
+schedule.every().minute.at(":00").do(main)
+schedule.every().minute.at(":30").do(main)
+
+while True:
+    schedule.run_pending()
+    time.sleep(1)
