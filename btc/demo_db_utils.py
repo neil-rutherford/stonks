@@ -276,7 +276,7 @@ def purge_old_prices(older_than=48):
     con = sqlite3.connect("demo_database.db")
     cur = con.cursor()
     cur.execute(
-        f"DELETE FROM price WHERE timestamp LIKE {condition}%"
+        f'DELETE FROM price WHERE timestamp LIKE "{condition}:%"'
     )
     con.commit()
     con.close()
@@ -296,7 +296,7 @@ def purge_old_advices(older_than=48):
     con = sqlite3.connect("demo_database.db")
     cur = con.cursor()
     cur.execute(
-        f"DELETE FROM advice WHERE timestamp LIKE {condition}%"
+        f'DELETE FROM advice WHERE timestamp LIKE "{condition}:%"'
     )
     con.commit()
     con.close()
