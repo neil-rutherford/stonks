@@ -2,7 +2,7 @@ import demo_funcs
 import schedule
 import time
 
-def main(window_size=120, k=2, desired_profit=1.01):
+def main(window_size=120, k=1, desired_profit=1.005):
     try:
         # Save BTC price
         demo_funcs.get_btc_price()
