@@ -2,7 +2,7 @@ import demo_funcs
 import schedule
 import time
 
-def main(window_size=120, k=1, desired_profit=1.01):
+def main(window_size=120, k=2, desired_profit=1.01):
     try:
         # Save BTC price
         demo_funcs.get_btc_price()
@@ -31,7 +31,12 @@ def main(window_size=120, k=1, desired_profit=1.01):
         pass
 
 schedule.every().minute.at(":00").do(main)
+
+schedule.every().minute.at(":15").do(demo_funcs.purge)
+
 schedule.every().minute.at(":30").do(main)
+
+schedule.every().minute.at(":45").do(demo_funcs.purge)
 
 while True:
     schedule.run_pending()
