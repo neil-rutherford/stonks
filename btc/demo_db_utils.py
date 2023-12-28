@@ -260,3 +260,43 @@ def read_account_balances(limit):
         }
         data_list.append(data_dict)
     return data_list  
+
+
+def purge_old_prices(older_than=48):
+    '''
+    Deletes price entries that are over 48 hours old. Used to prevent database from getting too big.
+
+    :param older_than:      Delete older than x hours, as an integer
+    :rtype:                 None
+    '''
+    now = datetime.datetime.now(datetime.UTC)
+    limit = now - datetime.timedelta(hours=int(older_than))
+    condition = limit.strftime('%Y-%m-%d %H:%M')
+
+    con = sqlite3.connect("demo_database.db")
+    cur = con.cursor()
+    cur.execute(
+        f"DELETE FROM price WHERE timestamp LIKE {condition}%"
+    )
+    con.commit()
+    con.close()
+
+
+def purge_old_advices(older_than=48):
+    '''
+    Deletes advice entries that are over 48 hours old. Used to prevent database from getting too big.
+
+    :param older_than:      Delete older than x hours, as an integer
+    :rtype:                 None
+    '''
+    now = datetime.datetime.now(datetime.UTC)
+    limit = now - datetime.timedelta(hours=int(older_than))
+    condition = limit.strftime('%Y-%m-%d %H:%M')
+
+    con = sqlite3.connect("demo_database.db")
+    cur = con.cursor()
+    cur.execute(
+        f"DELETE FROM advice WHERE timestamp LIKE {condition}%"
+    )
+    con.commit()
+    con.close()
