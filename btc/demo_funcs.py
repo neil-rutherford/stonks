@@ -1,7 +1,6 @@
 import requests
 import demo_db_utils as db_utils
 import datetime
-import sys
 import numpy as np
 
 def logger(message):
@@ -10,7 +9,7 @@ def logger(message):
 
 
 def get_btc_price():
-    r = requests.get('https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT')
+    r = requests.get('https://api.binance.us/api/v3/ticker/price?symbol=BTCUSDT')
     if r.status_code == 200:
         db_utils.create_price(float(r.json()['price']))
         return float(r.json()['price'])
@@ -109,7 +108,6 @@ def sell(sell_advice_dict, desired_profit):
         pass
     else:
         # If the proposed sale price is less than or equal to buy price, pass
-        # YUHHHHHHH
         profit_multiplier = (float(sell_advice_dict['price']) / float(last_trade[0]['buy_price']))
         if profit_multiplier < float(desired_profit):
             pass
@@ -128,3 +126,8 @@ def sell(sell_advice_dict, desired_profit):
                 amount=((profit_multiplier) * (last_trade[0]['amount'])) * 0.999 # Simulate Binance 0.1% fee
             )
             return last_trade
+
+
+def purge(older_than=48):
+    db_utils.purge_old_prices(older_than)
+    db.utils.purge_old_advices(older_than)
