@@ -130,4 +130,4 @@ def sell(sell_advice_dict, desired_profit):
 
 def purge(older_than=48):
     db_utils.purge_old_prices(older_than)
-    db.utils.purge_old_advices(older_than)
+    db_utils.purge_old_advices(older_than)
