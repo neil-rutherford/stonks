@@ -128,6 +128,6 @@ def sell(sell_advice_dict, desired_profit):
             return last_trade
 
 
-def purge(older_than=48):
+def purge(older_than=528):
     db_utils.purge_old_prices(older_than)
     db_utils.purge_old_advices(older_than)
