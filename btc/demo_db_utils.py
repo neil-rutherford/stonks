@@ -262,9 +262,9 @@ def read_account_balances(limit):
     return data_list  
 
 
-def purge_old_prices(older_than=48):
+def purge_old_prices(older_than=528):
     '''
-    Deletes price entries that are over 48 hours old. Used to prevent database from getting too big.
+    Deletes price entries that are over 528 hours (22 days) old. Used to prevent database from getting too big.
 
     :param older_than:      Delete older than x hours, as an integer
     :rtype:                 None
@@ -282,9 +282,9 @@ def purge_old_prices(older_than=48):
     con.close()
 
 
-def purge_old_advices(older_than=48):
+def purge_old_advices(older_than=528):
     '''
-    Deletes advice entries that are over 48 hours old. Used to prevent database from getting too big.
+    Deletes advice entries that are over 528 hours (22 days) old. Used to prevent database from getting too big.
 
     :param older_than:      Delete older than x hours, as an integer
     :rtype:                 None
