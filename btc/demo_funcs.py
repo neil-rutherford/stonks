@@ -26,7 +26,7 @@ def load_price_data(window_size):
             data_list.append(x['price'])
         return data_list
     else:
-        logger("[load_price_data] Insufficient data.")
+        #logger("[load_price_data] Insufficient data.")
         raise ValueError("Insufficient data.")
 
 
