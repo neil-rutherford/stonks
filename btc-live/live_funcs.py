@@ -9,13 +9,16 @@ def logger(message):
 
 
 def get_btc_price():
-    r = requests.get('https://api.binance.us/api/v3/ticker/price?symbol=BTCUSDT')
-    if r.status_code == 200:
-        db_utils.create_price(float(r.json()['price']))
-        return float(r.json()['price'])
-    else:
-        logger(f"[get_btc_price] Failed at {datetime.datetime.now(datetime.UTC).strftime('%Y-%m-%d %H:%M:%S')}. Error message: {r.json()}")
-        raise ValueError("Failed to get BTC price from API.")
+    try: # Error handling
+        r = requests.get('https://api.binance.us/api/v3/ticker/price?symbol=BTCUSDT')
+        if r.status_code == 200:
+            db_utils.create_price(float(r.json()['price']))
+            return float(r.json()['price'])
+        else:
+            logger(f"[get_btc_price] Failed at {datetime.datetime.now(datetime.UTC).strftime('%Y-%m-%d %H:%M:%S')}. Error message: {r.json()}")
+            raise ValueError("Failed to get BTC price from API.")
+    except:
+        pass
 
 
 def load_price_data(window_size):
